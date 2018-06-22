@@ -1,0 +1,10 @@
+2018-06-19 13:46:34.508 LOG_ALARM -----------------  log4z thread started!   ---------------------------- 
+2018-06-19 13:46:34.509 LOG_ALARM  logger id=0 path=./log/ name=V5KStreamer level=0 display=1 
+2018-06-19 13:46:34.510 LOG_ALARM udp://@192.168.4.109:7501 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 817 
+2018-06-19 13:46:34.510 LOG_ALARM rtp://192.168.4.90:9999 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 818 
+2018-06-19 13:46:34.510 LOG_ALARM EVENT6 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 819 
+2018-06-19 13:46:34.510 LOG_ALARM vlcCommunicationpipe6 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 820 
+2018-06-19 13:46:34.510 LOG_DEBUG start thread ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 520 
+2018-06-19 13:46:34.513 LOG_DEBUG init OK ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 522 
+2018-06-19 13:46:36.257 LOG_DEBUG open OK ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 525 
+2018-06-19 13:46:36.258 LOG_DEBUG open InitOutCtx ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 530 

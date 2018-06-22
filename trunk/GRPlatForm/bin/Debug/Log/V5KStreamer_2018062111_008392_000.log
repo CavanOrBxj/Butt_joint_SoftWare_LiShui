@@ -1,0 +1,10 @@
+2018-06-21 11:09:50.553 LOG_ALARM -----------------  log4z thread started!   ---------------------------- 
+2018-06-21 11:09:50.553 LOG_ALARM  logger id=0 path=./log/ name=V5KStreamer level=0 display=1 
+2018-06-21 11:09:50.554 LOG_ALARM udp://@D:\11.mp3 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 817 
+2018-06-21 11:09:50.554 LOG_ALARM rtp://192.168.4.90:9999 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 818 
+2018-06-21 11:09:50.554 LOG_ALARM EVENT2 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 819 
+2018-06-21 11:09:50.554 LOG_ALARM vlcCommunicationpipe2 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 820 
+2018-06-21 11:09:50.554 LOG_DEBUG start thread ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 520 
+2018-06-21 11:09:50.557 LOG_DEBUG init OK ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 522 
+2018-06-21 11:10:02.136 LOG_INFO Couldn't open input stream.
+ ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 210 

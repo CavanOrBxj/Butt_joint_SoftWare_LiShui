@@ -1,0 +1,10 @@
+2018-06-19 13:05:48.033 LOG_ALARM -----------------  log4z thread started!   ---------------------------- 
+2018-06-19 13:05:48.034 LOG_ALARM  logger id=0 path=./log/ name=V5KStreamer level=0 display=1 
+2018-06-19 13:05:48.034 LOG_ALARM D:\Abutment\93\AudioFiles\EBDR_5fc74408-04cf-44e4-805b-152dd1fc5b08.mp3 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 817 
+2018-06-19 13:05:48.034 LOG_ALARM rtp://192.168.4.90:9999 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 818 
+2018-06-19 13:05:48.034 LOG_ALARM EVENT2 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 819 
+2018-06-19 13:05:48.034 LOG_ALARM vlcCommunicationpipe2 ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 820 
+2018-06-19 13:05:48.035 LOG_DEBUG start thread ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 520 
+2018-06-19 13:05:48.038 LOG_DEBUG init OK ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 522 
+2018-06-19 13:05:48.075 LOG_DEBUG open OK ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 525 
+2018-06-19 13:05:48.077 LOG_DEBUG open InitOutCtx ( d:\v5kstreamer\v5kstreamer\v5kstreamer.cpp ) : 530 
