@@ -1189,8 +1189,6 @@ namespace GRPlatForm
                         ccplay.CreateCPPPlayer();
                         Thread.Sleep(2000);
                         ccplay.StopCPPPlayer();
-                        //string strSql = "delete  from PLAYRECORD";
-                        //mainForm.dba.UpdateDbBySQL(strSql);
                         ccplay.m_bPlayFlag = false;
                     }
                     Thread.Sleep(500);
@@ -1397,10 +1395,13 @@ namespace GRPlatForm
                                                 if (strMsgType == "2" && PlayType == "1")
                                                 {
                                                     SetText("停止播发：" + DateTime.Now.ToString(), Color.Red);
-                                                    object tag = (object)ebd;
-                                                    CommandSendto5000(tag, "AREANETSTOP");
+                                                    string strSql = string.Format("update PLAYRECORD set PR_REC_STATUS = '{0}' where PR_SourceID='{1}'", "删除", TsCmdStoreID);
+                                                    strSql += " update EBMInfo set EBMState=1 where SEBDID='" + SEBDIDStatusFlag + "' ";
+                                                    strSql += "delete from InfoVlaue";
+                                                    //string strSql = "update PLAYRECORD set PR_REC_STATUS = '删除'";
+                                                    mainForm.dba.UpdateDbBySQL(strSql);
                                                     Tccplayer.Enabled = false;
-                                                   // ccplay.StopCPPPlayer2();
+                                                    ccplay.StopCPPPlayer2();
                                                     RealAudioFlag = false;//标记为已经执行
                                                     lDealTarFiles.RemoveAt(0);//无论是否成功，都移除
                                                     continue;
@@ -1409,10 +1410,10 @@ namespace GRPlatForm
                                                 if (strMsgType == "2" && PlayType == "2")
                                                 {
                                                     SetText("停止播发：" + DateTime.Now.ToString(), Color.Red);
-                                                   
+
                                                     object tag = (object)ebd;
                                                     CommandSendto5000(tag, "AREANETSTOP");
-                                                   
+
                                                     Tccplayer.Enabled = false;
                                                     RealAudioFlag = false;//标记为已经执行
                                                     lDealTarFiles.RemoveAt(0);//无论是否成功，都移除
@@ -1517,6 +1518,7 @@ namespace GRPlatForm
                                                                     m_ccplayURL = "file:///" + AudioFileListTmp[iLoopMedia];
                                                                     if (ccplay.m_bPlayFlag == false)
                                                                     {
+                                                                        SentOpenCommand(ebd);
                                                                         ccplay.m_bPlayFlag = true;
                                                                     }
                                                                     else
@@ -1601,9 +1603,20 @@ namespace GRPlatForm
 
                                                                     ccplay.TsCmdStoreID = TsCmdStoreID;//PlayRecord停止的标示
                                                                     m_ccplayURL = "udp://@" + m_StreamPortURL;
-                                                                    ebd.AudioPath = m_ccplayURL;
-                                                                    object tag = (object)ebd;
-                                                                    CommandSendto5000(tag, "AREANETPLAY");
+                                                                    if (ccplay.m_bPlayFlag == false)
+                                                                    {
+                                                                        SentOpenCommand(ebd);
+                                                                        ccplay.m_bPlayFlag = true;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ccplay.StopCPPPlayer2();
+                                                                        Thread.Sleep(1000);
+                                                                        ccplayerthread.Abort();
+                                                                        Thread.Sleep(1000);
+                                                                        ccplayerthread = new Thread(CPPPlayerThread);
+                                                                        ccplayerthread.Start();
+                                                                    }
                                                                 }
                                                                 else if (strAuxiliaryType == "3")
                                                                 {
@@ -1612,6 +1625,7 @@ namespace GRPlatForm
                                                                     m_ccplayURL = AudioCloudIP + FileNameNum + ".wav";     //"udp://@" + m_StreamPortURL;
                                                                     if (ccplay.m_bPlayFlag == false)
                                                                     {
+                                                                        SentOpenCommand(ebd);
                                                                         ccplay.m_bPlayFlag = true;
                                                                     }
                                                                     else
@@ -1677,19 +1691,7 @@ namespace GRPlatForm
                                                         System.IO.File.Copy(AudioFileListTmp[ai], targetPath, true);
                                                         AudioFileList.Add(targetPath);
 
-                                                        //if ((PlayType == "2"))//(AudioFlag == "2")
-                                                        
-                                                            //sDateTime = ebd.EBM.MsgBasicInfo.StartTime;
-                                                            //sStartTime = ebd.EBM.MsgBasicInfo.StartTime;
-                                                            //sEndDateTime = ebd.EBM.MsgBasicInfo.EndTime;
-
-                                                            //if (TEST == "YES")
-                                                            //{
-                                                            //    sDateTime = DateTime.Now.AddSeconds(10).ToString("yyyy-MM-dd HH:mm:ss");
-                                                            //    sStartTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                                                            //    sEndDateTime = DateTime.Now.AddMinutes(5).ToString("yyyy-MM-dd HH:mm:ss");//ebd.EBM.MsgBasicInfo.EndTime;
-
-                                                            //}
+                                                
                                                             SetText("EBM开始时间: " + ebd.EBM.MsgBasicInfo.StartTime + "===>EBM结束时间: " + ebd.EBM.MsgBasicInfo.EndTime, Color.Blue);
                                                             DateTime EbStartTime = DateTime.Parse(ebd.EBM.MsgBasicInfo.StartTime).AddSeconds(2);
                                                             if (EbStartTime < DateTime.Now)
@@ -1984,19 +1986,182 @@ namespace GRPlatForm
         }
 
 
+        /// <summary>
+        /// 发送开机指令
+        /// </summary>
+        /// <param name="edb"></param>
+        private void SentOpenCommand(EBD edb)
+        {
+            string Severity = edb.EBM.MsgBasicInfo.Severity;
+            string data = "/>78|AREANETPLAY|3|1|1|01|192.168.4.108;6666;0;0;mp3|192.168.4.109|Client,1|0|UKEY|#";
+            string[] AreaCode = edb.EBM.MsgContent.AreaCode.Split(',');
+            string serverIP = serverini.ReadValue("5000System", "ServerAddress");
+            string serverPort = serverini.ReadValue("5000System", "ServerPorts");
+            string Vport = serverini.ReadValue("5000System", "VirtualConsoleaPort");
+            string VIP = serverini.ReadValue("5000System", "VirtualConsoleaAddress");
+            string LOCALIP = serverini.ReadValue("INFOSET", "ServerIP");
+
+            for (int a = 0; a < AreaCode.Length; a++)
+            {
+                string strTmpAddr = AreaCode[a];
+
+                if (!strTmpAddr.Contains("3311"))//只针对丽水松阳项目
+                {
+                    return;
+                }
+
+                string keyw = "";
+                foreach (string key in AreaMapping.AreaDic.Keys)
+                {
+                    if (AreaMapping.AreaDic[key].Equals(strTmpAddr))
+                    {
+                        keyw = key;
+                        break;
+                    }
+                }
+
+                if (keyw != "")
+                {
+                    TcpClient tcpClient = new TcpClient();
+                    tcpClient.Connect(IPAddress.Parse(serverIP), Convert.ToInt32(serverPort));
+                    NetworkStream ns = tcpClient.GetStream();
+                    string FilePlay_ID = mainForm.dba.GetFilePlay_ID(serverIP).ToString();
+                    string pp = "/>00|AREANETPLAY|" + keyw + "|1|1|01|" + VIP + ";" + Vport + ";0;0;mp3|" + LOCALIP + "|Client,1|0|UKEY|#"; ;//从长度后至#共69
+
+                    string length = (pp.Length - 4).ToString();
+                    pp = pp.Replace("/>00", "/>" + length);
+                    Log.Instance.LogWrite(pp + "--" + serverIP + "--" + serverPort);
+                    if (ns.CanWrite)
+                    {
+                        Byte[] sendBytes = Encoding.UTF8.GetBytes(pp);
+                        ns.Write(sendBytes, 0, sendBytes.Length);
+                    }
+                    else
+                    {
+                        MessageBox.Show("不能写入数据流", "终止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        tcpClient.Close();
+                        ns.Close();
+                        return;
+                    }
+
+                    ns.Close();
+                    tcpClient.Close();
+
+
+                    TcpClient tcpClient1 = new TcpClient();
+                    tcpClient1.Connect(IPAddress.Parse(serverIP), Convert.ToInt32(serverPort));
+                    NetworkStream ns1 = tcpClient1.GetStream();
+                    string commandtype = "";
+
+                    switch (Severity)
+                    {
+                        case "0":
+                        case "1":
+                            commandtype = "AREAHIGH";
+                            break;
+                        case "2":
+                        case "3":
+                        case "4":
+                        case "15":
+                            commandtype = "AREALOW";
+                            break;
+
+                    }
+                    string pp1 = "/>00|" + commandtype + "|" + keyw + "|1|1|01|00|" + LOCALIP + "|Client,1|0|UKEY|#"; ;//从长度后至#共69
+                                                                                                                       //   string pp1 = "/>00|AREALOW|" + keyw + "|1|1|01|00|" + LOCALIP + "|Client,1|0|UKEY|#"; ;//从长度后至#共69
+                    string length1 = (pp1.Length - 4).ToString();
+                    pp1 = pp1.Replace("/>00", "/>" + length1);
+                    if (ns1.CanWrite)
+                    {
+                        Byte[] sendBytes = Encoding.UTF8.GetBytes(pp1);
+                        ns1.Write(sendBytes, 0, sendBytes.Length);
+                    }
+                    else
+                    {
+                        MessageBox.Show("不能写入数据流", "终止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        tcpClient1.Close();
+                        ns1.Close();
+                        return;
+                    }
+
+                    ns1.Close();
+                    tcpClient1.Close();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 发送关机指令
+        /// </summary>
+        /// <param name="edb"></param>
+        private void SentCloseCommand(EBD edb)
+        {
+            string data = "/>57|AREANETSTOP|29|1|1|01|00|192.168.4.109|Client,1|0|UKEY|#";
+          
+            string[] AreaCode = { "331124000000", "331126000000" };
+            string serverIP = serverini.ReadValue("5000System", "ServerAddress");
+            string serverPort = serverini.ReadValue("5000System", "ServerPorts");
+            string LOCALIP = serverini.ReadValue("INFOSET", "ServerIP");
+
+            for (int a = 0; a < AreaCode.Length; a++)
+            {
+                string strTmpAddr = AreaCode[a];
+
+
+                if (!strTmpAddr.Contains("3311"))//只针对丽水松阳项目
+                {
+                    return;
+                }
+
+                string keyw = "";
+                foreach (string key in AreaMapping.AreaDic.Keys)
+                {
+                    if (AreaMapping.AreaDic[key].Equals(strTmpAddr))
+                    {
+                        keyw = key;
+                        break;
+                    }
+                }
+
+         
+                if (keyw != "")
+                {
+                    TcpClient tcpClient = new TcpClient();
+                    tcpClient.Connect(IPAddress.Parse(serverIP), Convert.ToInt32(serverPort));
+                    NetworkStream ns = tcpClient.GetStream();
+                    string pp = "/>00|AREANETSTOP|" + keyw + "|1|1|01|00|" + LOCALIP + "|Client,1|0|UKEY|#"; ;//从长度后至#共69
+                    string length = (pp.Length - 4).ToString();
+                    pp = pp.Replace("/>00", "/>" + length);
+                    if (ns.CanWrite)
+                    {
+                        Byte[] sendBytes = Encoding.UTF8.GetBytes(pp);
+                        ns.Write(sendBytes, 0, sendBytes.Length);
+                    }
+                    else
+                    {
+                        MessageBox.Show("不能写入数据流", "终止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        tcpClient.Close();
+                        ns.Close();
+                        return;
+                    }
+
+                    ns.Close();
+                    tcpClient.Close();
+                }
+                
+            }
+        }
+
         private void DealCommandAreaNetPlay(object tag)
         {
             try
             {
                 Killv5k();
                 EBD edb = (EBD)tag;
-
                 string Severity = edb.EBM.MsgBasicInfo.Severity;
                 string data = "/>78|AREANETPLAY|3|1|1|01|192.168.4.108;6666;0;0;mp3|192.168.4.109|Client,1|0|UKEY|#";
-
-                
                 string[] AreaCode = edb.EBM.MsgContent.AreaCode.Split(',');
-
                 string serverIP = serverini.ReadValue("5000System", "ServerAddress");
                 string serverPort = serverini.ReadValue("5000System", "ServerPorts");
                 string Vport = serverini.ReadValue("5000System", "VirtualConsoleaPort");
@@ -2100,6 +2265,10 @@ namespace GRPlatForm
 
                     AreaDict.Add(m_handle, keyw);
                     string IPinfo = serverini.ReadValue("VirtualConsole", "IPinfo");
+
+
+                //    ebd.AudioPath = "C:\\Users\\Administrator\\Desktop\\丽水测试环境\\源\\1111.mp3";
+
                     string strCmd = ebd.AudioPath + " " + IPinfo + " EVENT" + SingletonInfo.GetInstance().counter5k.ToString() + " vlcCommunicationpipe" + SingletonInfo.GetInstance().counter5k.ToString();
                     Process proc = new Process();
                     proc.StartInfo.FileName = System.IO.Directory.GetCurrentDirectory() + "\\V5KStreamer.exe";
@@ -4755,37 +4924,44 @@ namespace GRPlatForm
 
         private void SendOffCommand()
         {
-            string data = "/>57|AREANETSTOP|29|1|1|01|00|192.168.4.109|Client,1|0|UKEY|#";
-
-            string serverIP = serverini.ReadValue("5000System", "ServerAddress");
-            string serverPort = serverini.ReadValue("5000System", "ServerPorts");
-            string LOCALIP = serverini.ReadValue("INFOSET", "ServerIP");
-            string keyw = AreaDict[m_handle].ToString();
-            AreaDict.Remove(m_handle);
-            if (keyw != "")
+            try
             {
-                TcpClient tcpClient = new TcpClient();
-                tcpClient.Connect(IPAddress.Parse(serverIP), Convert.ToInt32(serverPort));
-                NetworkStream ns = tcpClient.GetStream();
-                string pp = "/>00|AREANETSTOP|" + keyw + "|1|1|01|00|" + LOCALIP + "|Client,1|0|UKEY|#"; ;//从长度后至#共69
-                string length = (pp.Length - 4).ToString();
-                pp = pp.Replace("/>00", "/>" + length);
-                if (ns.CanWrite)
+                string data = "/>57|AREANETSTOP|29|1|1|01|00|192.168.4.109|Client,1|0|UKEY|#";
+                string serverIP = serverini.ReadValue("5000System", "ServerAddress");
+                string serverPort = serverini.ReadValue("5000System", "ServerPorts");
+                string LOCALIP = serverini.ReadValue("INFOSET", "ServerIP");
+                string keyw = AreaDict[m_handle].ToString();
+                AreaDict.Remove(m_handle);
+                if (keyw != "")
                 {
-                    Byte[] sendBytes = Encoding.UTF8.GetBytes(pp);
-                    ns.Write(sendBytes, 0, sendBytes.Length);
-                }
-                else
-                {
-                    MessageBox.Show("不能写入数据流", "终止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    tcpClient.Close();
+                    TcpClient tcpClient = new TcpClient();
+                    tcpClient.Connect(IPAddress.Parse(serverIP), Convert.ToInt32(serverPort));
+                    NetworkStream ns = tcpClient.GetStream();
+                    string pp = "/>00|AREANETSTOP|" + keyw + "|1|1|01|00|" + LOCALIP + "|Client,1|0|UKEY|#"; ;//从长度后至#共69
+                    string length = (pp.Length - 4).ToString();
+                    pp = pp.Replace("/>00", "/>" + length);
+                    if (ns.CanWrite)
+                    {
+                        Byte[] sendBytes = Encoding.UTF8.GetBytes(pp);
+                        ns.Write(sendBytes, 0, sendBytes.Length);
+                    }
+                    else
+                    {
+                        MessageBox.Show("不能写入数据流", "终止", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        tcpClient.Close();
+                        ns.Close();
+                        return;
+                    }
                     ns.Close();
-                    return;
+                    tcpClient.Close();
                 }
-
-                ns.Close();
-                tcpClient.Close();
             }
+            catch (Exception ex)
+            {
+
+                Log.Instance.LogWrite(ex.ToString());
+            }
+           
         }
     }
 }

@@ -131,7 +131,7 @@
             // mnuServerStart
             // 
             this.mnuServerStart.Name = "mnuServerStart";
-            this.mnuServerStart.Size = new System.Drawing.Size(124, 22);
+            this.mnuServerStart.Size = new System.Drawing.Size(152, 22);
             this.mnuServerStart.Text = "启动伺服";
             this.mnuServerStart.Click += new System.EventHandler(this.mnuServerStart_Click);
             // 
@@ -182,7 +182,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "应急广播消息服务V1.4";
+            this.Text = "应急广播消息服务V1.5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.mainForm_FormClosing);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.menuStrip.ResumeLayout(false);
