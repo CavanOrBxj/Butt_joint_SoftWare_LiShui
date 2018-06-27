@@ -1,0 +1,69 @@
+2018-06-26 17:03:39.755 LOG_ALARM -----------------  log4z thread started!   ---------------------------- 
+2018-06-26 17:03:39.756 LOG_ALARM  logger id=0 path=./log/ name=V5KStreamer level=0 display=1 
+2018-06-26 17:03:39.756 LOG_ALARM GetLastError 0 ( V5KStreamer.cpp ) : 773 
+2018-06-26 17:03:39.756 LOG_ALARM D:\Abutment\93\AudioFiles\EBDR_7eaf3099-20fe-4b83-ab71-9d736525faa3.mp3 ( V5KStreamer.cpp ) : 804 
+2018-06-26 17:03:39.756 LOG_INFO hExit000000b4 ( V5KStreamer.cpp ) : 816 
+2018-06-26 17:03:39.756 LOG_DEBUG start thread ( V5KStreamer.cpp ) : 507 
+2018-06-26 17:03:39.756 LOG_INFO �ȴ��˳� ( V5KStreamer.cpp ) : 817 
+2018-06-26 17:03:39.759 LOG_DEBUG init OK ( V5KStreamer.cpp ) : 509 
+2018-06-26 17:03:39.770 LOG_INFO Estimating duration from bitrate, this may be inaccurate
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO Input #0, mp3, from 'D:\Abutment\93\AudioFiles\EBDR_7eaf3099-20fe-4b83-ab71-9d736525faa3.mp3':
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO   Metadata:
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO     artist          :  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 张靓颖 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO     album           :  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 老地方 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO     title           :  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 老地方 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO     TYER            :  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 2014-11-14 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO   Duration:  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 00:04:33.27 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO , start:  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.770 LOG_INFO 0.000000 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO , bitrate:  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 128 kb/s ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO     Stream #0:0 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO : Audio: mp3, 44100 Hz, stereo, s16p, 128 kb/s ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO     Stream #0:1 ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO : Video: mjpeg, yuvj444p(pc, bt470bg/unknown/unknown), 240x240 [SAR 300:300 DAR 1:1] ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO ,  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 90k tbr,  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 90k tbn,  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 90k tbc ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO     Metadata:
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO       title           :  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO e ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO       comment         :  ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO Cover (front) ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.771 LOG_DEBUG open OK ( V5KStreamer.cpp ) : 512 
+2018-06-26 17:03:39.771 LOG_INFO 'circular_buffer_size' option was set but it is not supported on this build (pthread support is required)
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:39.773 LOG_INFO 'circular_buffer_size' option was set but it is not supported on this build (pthread support is required)
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:44.169 LOG_DEBUG open InitOutCtx ( V5KStreamer.cpp ) : 517 
+2018-06-26 17:03:44.170 LOG_INFO Using AVStream.codec to pass codec parameters to muxers is deprecated, use AVStream.codecpar instead.
+ ( V5KStreamer.cpp ) : 706 
+2018-06-26 17:03:44.177 LOG_DEBUG NO PTS ( V5KStreamer.cpp ) : 293 

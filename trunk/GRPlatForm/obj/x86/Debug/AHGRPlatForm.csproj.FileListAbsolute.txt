@@ -786,6 +786,7 @@ C:\Users\Administrator\Desktop\丽水对接2018-06-19最新\trunk\GRPlatForm\obj
 E:\GitHub\丽水对接2018-06-12_V5K修改版\Butt_joint_SoftWare_LiShui\trunk\GRPlatForm\bin\Debug\HBPlatForm.exe.config
 E:\GitHub\丽水对接2018-06-12_V5K修改版\Butt_joint_SoftWare_LiShui\trunk\GRPlatForm\bin\Debug\HBPlatForm.exe
 E:\GitHub\丽水对接2018-06-12_V5K修改版\Butt_joint_SoftWare_LiShui\trunk\GRPlatForm\bin\Debug\HBPlatForm.pdb
+E:\GitHub\丽水对接2018-06-12_V5K修改版\Butt_joint_SoftWare_LiShui\trunk\GRPlatForm\obj\x86\Debug\AHGRPlatForm.csprojResolveAssemblyReference.cache
 E:\GitHub\丽水对接2018-06-12_V5K修改版\Butt_joint_SoftWare_LiShui\trunk\GRPlatForm\obj\x86\Debug\GRPlatForm.AudioPlay.resources
 E:\GitHub\丽水对接2018-06-12_V5K修改版\Butt_joint_SoftWare_LiShui\trunk\GRPlatForm\obj\x86\Debug\GRPlatForm.AudioPlayer.resources
 E:\GitHub\丽水对接2018-06-12_V5K修改版\Butt_joint_SoftWare_LiShui\trunk\GRPlatForm\obj\x86\Debug\GRPlatForm.EBMInfo.resources
