@@ -2267,7 +2267,7 @@ namespace GRPlatForm
                     string IPinfo = serverini.ReadValue("VirtualConsole", "IPinfo");
 
 
-                //    ebd.AudioPath = "C:\\Users\\Administrator\\Desktop\\丽水测试环境\\源\\1111.mp3";
+                    ebd.AudioPath = "C:\\Users\\Administrator\\Desktop\\丽水测试环境\\源\\1111.mp3";
 
                     string strCmd = ebd.AudioPath + " " + IPinfo + " EVENT" + SingletonInfo.GetInstance().counter5k.ToString() + " vlcCommunicationpipe" + SingletonInfo.GetInstance().counter5k.ToString();
                     Process proc = new Process();

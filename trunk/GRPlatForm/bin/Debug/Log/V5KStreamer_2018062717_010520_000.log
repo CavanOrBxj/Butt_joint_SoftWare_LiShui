@@ -1,0 +1,28 @@
+2018-06-27 17:24:09.740 LOG_ALARM -----------------  log4z thread started!   ---------------------------- 
+2018-06-27 17:24:09.741 LOG_ALARM  logger id=0 path=./log/ name=V5KStreamer level=0 display=1 
+2018-06-27 17:24:09.741 LOG_ALARM GetLastError 0 ( V5KStreamer.cpp ) : 773 
+2018-06-27 17:24:09.741 LOG_ALARM C:\Users\Administrator\Desktop\丽水测试环境\源\1111.wav ( V5KStreamer.cpp ) : 804 
+2018-06-27 17:24:09.741 LOG_INFO hExit000000b4 ( V5KStreamer.cpp ) : 816 
+2018-06-27 17:24:09.741 LOG_INFO 等待退出 ( V5KStreamer.cpp ) : 817 
+2018-06-27 17:24:09.741 LOG_DEBUG start thread ( V5KStreamer.cpp ) : 507 
+2018-06-27 17:24:09.744 LOG_DEBUG init OK ( V5KStreamer.cpp ) : 509 
+2018-06-27 17:24:09.754 LOG_INFO Input #0, wav, from 'C:\Users\Administrator\Desktop\丽水测试环境\源\1111.wav':
+ ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.754 LOG_INFO   Duration:  ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_INFO 00:00:30.61 ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_INFO , bitrate:  ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_INFO 256 kb/s ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_INFO     Stream #0:0 ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_INFO : Audio: pcm_s16le ([1][0][0][0] / 0x0001), 16000 Hz, 1 channels, s16, 256 kb/s ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_INFO 
+ ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.755 LOG_DEBUG open OK ( V5KStreamer.cpp ) : 512 
+2018-06-27 17:24:09.755 LOG_INFO 'circular_buffer_size' option was set but it is not supported on this build (pthread support is required)
+ ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.756 LOG_INFO 'circular_buffer_size' option was set but it is not supported on this build (pthread support is required)
+ ( V5KStreamer.cpp ) : 706 
+2018-06-27 17:24:09.756 LOG_DEBUG open InitOutCtx ( V5KStreamer.cpp ) : 517 
+2018-06-27 17:24:09.758 LOG_INFO Using AVStream.codec to pass codec parameters to muxers is deprecated, use AVStream.codecpar instead.
+ ( V5KStreamer.cpp ) : 706 
